@@ -1,0 +1,58 @@
+.container_home {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc; /* Добавляем рамку */
+    border-radius: 8px; /* Скругляем углы */
+}
+
+.header_home  {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.header_home  h1 {
+    font-size: 48px;
+    color: #007bff;
+    margin-bottom: 20px;
+}
+
+.header_home  p {
+    font-size: 20px;
+    margin-bottom: 30px;
+
+}
+
+.feature-box_home {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    margin-bottom: 50px;
+}
+
+.feature-box_home  h2 {
+    font-size: 28px;
+    color: #007bff;
+    margin-bottom: 30px;
+}
+
+.feature-box_home  p {
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+.btn-primary_home  {
+    background-color: #007bff;
+    border-color: #007bff;
+    font-size: 18px;
+    padding: 12px 24px;
+    border-radius: 8px;
+    color:white;
+}
+
+.btn-primary_home :hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}

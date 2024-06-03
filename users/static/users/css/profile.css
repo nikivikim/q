@@ -1,0 +1,28 @@
+    .profile {
+        margin-top: 50px;
+    }
+
+    .user-info {
+        margin-bottom: 20px;
+    }
+
+    .balances {
+        margin-top: 20px;
+    }
+
+    .balance {
+        margin-bottom: 20px;
+    }
+
+    .balance-date {
+        cursor: pointer;
+    }
+
+    .balance-details {
+        display: none;
+        margin-top: 10px;
+    }
+
+    .balance-details p {
+        margin-bottom: 5px;
+    }

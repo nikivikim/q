@@ -1,0 +1,12 @@
+<!-- templates/report_detail.html -->
+
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Отчет для {{ report.balance.company_name }} от {{ report.created_at }}</h1>
+<p>Текущая ликвидность: {{ report_data.current_ratio }}</p>
+<p>Быстрая ликвидность: {{ report_data.quick_ratio }}</p>
+<p>Абсолютная ликвидность: {{ report_data.absolute_ratio }}</p>
+<p>Анализ: {{ report_data.analyse_result }}</p>
+<img src="data:image/png;base64,{{ chart }}" alt="Chart">
+{% endblock %}

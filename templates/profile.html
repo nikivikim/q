@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Профиль</h1>
+<div class="user-info">
+    <p><strong>Имя пользователя:</strong> {{ user.username }}</p>
+    <p><strong>Электронная почта:</strong> {{ user.email }}</p>
+    <p><strong>Имя:</strong> {{ user.first_name }}</p>
+    <p><strong>Фамилия:</strong> {{ user.last_name }}</p>
+</div>
+
+<h3>Балансы</h3>
+{% if balances %}
+    {% for balance in balances %}
+        <div class="alert alert-info">
+            <h4 class="balance-date" style="cursor: pointer;" onclick="toggleBalanceDetails('balance-{{ balance.id }}')">
+                Наименование компании: {{ balance.company_name }} <br> Дата: {{ balance.date }}
+            </h4>
+            <div id="balance-{{ balance.id }}" class="balance-details" style="display: none;">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Наименование кода</th>
+                            <th>Код</th>
+                            <th>Значение 1</th>
+                            <th>Значение 2</th>
+                            <th>Значение 3</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for indicator_value in balance.indicator_values.all %}
+                            <tr>
+                                <td>{{ indicator_value.indicator.name }}</td>
+                                <td>{{ indicator_value.indicator.code }}</td>
+                                <td>{{ indicator_value.value }}</td>
+                                <td>{{ indicator_value.value2 }}</td>
+                                <td>{{ indicator_value.value3 }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <a href="{% url 'edit_balance' balance.id %}" class="btn btn-primary">Рассчитать</a>
+            </div>
+        </div>
+    {% endfor %}
+{% else %}
+    <p>У вас пока нет сохраненных балансов!</p>
+{% endif %}
+
+<form action="{% url 'logout' %}" method="post">
+    {% csrf_token %}
+    <button class="btn btn-outline-danger" type="submit">Выйти из профиля</button>
+</form>
+
+<script>
+function toggleBalanceDetails(balanceId) {
+    var details = document.getElementById(balanceId);
+    if (details.style.display === "none") {
+        details.style.display = "block";
+    } else {
+        details.style.display = "none";
+    }
+}
+</script>
+{% endblock %}

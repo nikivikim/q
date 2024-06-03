@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<h1>Редактирование Баланса</h1>
+<form method="post">
+    {% csrf_token %}
+    <div class="form-group">
+        {{ balance_form.company_name.label_tag }}
+        {{ balance_form.company_name }}
+    </div>
+    <div class="form-group">
+        {{ balance_form.activity_type.label_tag }}
+        {{ balance_form.activity_type }}
+    </div>
+    <div class="form-group">
+        {{ balance_form.date.label_tag }}
+        {{ balance_form.date }}
+    </div>
+
+    <h3>Indicators</h3>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Наименование кода</th>
+                <th>Код</th>
+                <th>Значение за период</th>
+                <th>Значение за прошлый период</th>
+                <th>Значение за позапрошлый период</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for form in indicator_forms %}
+                <tr>
+                    <td>{{ form.instance.indicator.name }}</td>
+                    <td>{{ form.instance.indicator.code }}</td>
+                    <td>{{ form.value }}</td>
+                    <td>{{ form.value2 }}</td>
+                    <td>{{ form.value3 }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>
+{% endblock %}

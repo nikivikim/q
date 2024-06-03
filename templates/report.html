@@ -1,0 +1,277 @@
+{% extends 'base.html' %}
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'users/css/report.css' %}">
+{% block content %}
+
+<div>
+    <h1>Анализ финансовой устойчивости и ликвидности организации "{{ balance.company_name }}"</h1>
+    <h2>За период с {{ balance.date }} по {{ previous_year_date2 }}</h2>
+</div>
+
+<div>
+    <p>
+        Отчет состоит из анализа финансового состояния организации "{{ balance.company_name }}" на основе
+        данных бухгалтерского баланса организации за три года.
+    </p>
+    <p>
+        Деятельность организации "{{ balance.activity_type }}" учтена при проведении анализа.
+    </p>
+</div>
+<div>
+
+    <h2>Анализ финансовой устойчивости
+            <div class="tooltips"><i class="fas fa-thin fa-circle-info "></i>
+  <span class="tooltiptext">Финансовая устойчивость — это способность организации поддерживать свое существование и бесперебойную работу, благодаря наличию определенных свободных средств и сбалансированности финансовых потоков
+    </span>
+</div>
+    </h2>
+     <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>Показатель</th>
+            <th>На {{ balance.date }}</th>
+            <th>На {{ previous_year_date }}</th>
+            <th>На {{ previous_year_date2 }}</th>
+            <th>Изменения показателя</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>Коэффициент автономии</td>
+            <td>{{ autonomy_ratio }}</td>
+            <td>{{ autonomy_ratio_value2 }}</td>
+            <td>{{ autonomy_ratio_value3 }}</td>
+            <td>{{autonomy_ratio_change}}</td>
+
+        </tr>
+        <tr>
+            <td> Коэффициент финансового левериджа </td>
+            <td>{{ leverage }}</td>
+            <td>{{ leverage_value2 }}</td>
+            <td>{{ leverage_value3 }}</td>
+            <td>{{leverage_change}}</td>
+        </tr>
+        <tr>
+            <td> Коэффициент обеспеченности собственными оборотными средствами </td>
+            <td>{{ sos }}</td>
+            <td>{{ sos_value2 }}</td>
+            <td>{{ sos_value3 }}</td>
+            <td>{{sos_change}}</td>
+        </tr>
+        <tr>
+            <td> Индекс постоянного актива</td>
+            <td>{{ index_active }}</td>
+            <td>{{ index_active_value2 }}</td>
+            <td>{{ index_active_value3 }}</td>
+            <td>{{index_active_change}}</td>
+        </tr>
+        <tr>
+            <td> Коэффициент маневренности</td>
+            <td>{{ cm }}</td>
+            <td>{{ cm_value2 }}</td>
+            <td>{{ cm_value3 }}</td>
+            <td>{{cm_change}}</td>
+        </tr>
+        <tr>
+            <td> Коэффициент финансовой устойчивости</td>
+            <td>{{ finance_stability }}</td>
+            <td>{{ finance_stability_value2 }}</td>
+            <td>{{ finance_stability_value3 }}</td>
+            <td>{{finance_stability_change}}</td>
+        </tr>
+        </tbody>
+     </table>
+</div>
+<div class="canvas">
+<canvas id="capitalPieChart" class="capitalPieChart" ></canvas>
+    </div>
+
+<div>
+    <h2>Анализ ликвидности
+        <div class="tooltips"><i class="fas fa-thin fa-circle-info "></i>
+  <span class="tooltiptext">Ликвидность - это способность компании преобразовать свои активы в наличные средства для покрытия текущих обязательств.
+    </span>
+</div>
+    </h2>
+
+
+
+    <p>
+        Анализ ликвидности играет важную
+        роль в финансовом здоровье компании,
+        позволяя определить ее способность встретить свои финансовые обязательства в срок.
+    </p>
+    <div>
+        <ul>
+            <li>
+                <p>Текущий коэффициент - показывает, насколько текущие активы компании покрывают ее текущие обязательства.
+                    Значение менее 1 указывает на возможные проблемы с ликвидностью.</p>
+            </li>
+
+            <li>
+                <p>
+                    Быстрый коэффициент - измеряет способность компании погасить текущие
+                    обязательства за счет своих наиболее ликвидных активов (наличные средства,
+                    ценные бумаги, счета, краткосрочные инвестиции). Большее значение предпочтительно.
+                </p>
+            </li>
+
+            <li>
+                <p>
+                    Абсолютная ликвидность - показывает, насколько быстро компания может
+                    погасить свои текущие обязательства только за счет наличных средств.
+                    Высокое значение указывает на хорошую финансовую готовность.
+                </p>
+            </li>
+
+        </ul>
+    </div>
+
+    <h4>Коэффициенты ликвидности</h4>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>Показатель</th>
+            <th>На {{ balance.date }}</th>
+            <th>На {{ previous_year_date }}</th>
+            <th>На {{ previous_year_date2 }}</th>
+            <th>Прогноз</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>Текущая ликвидность</td>
+            <td>{{ current_ratio }}</td>
+            <td>{{ current_ratio_value2 }}</td>
+            <td>{{ current_ratio_value3 }}</td>
+            <td>{{next_year_liquidity}}</td>
+        </tr>
+        <tr>
+            <td>Быстрая ликвидность</td>
+            <td>{{ quick_ratio }}</td>
+            <td>{{ quick_ratio_value2 }}</td>
+            <td>{{ quick_ratio_value3 }}</td>
+        </tr>
+        <tr>
+            <td>Абсолютная ликвидность</td>
+            <td>{{ absolute_ratio }}</td>
+            <td>{{ absolute_ratio_value2 }}</td>
+            <td>{{ absolute_ratio_value3 }}</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div>
+        <h3>Состояние ликвидности "{{ balance.company_name }}"</h3>
+        <p>Анализируя рассчитанные значения коэффициентов можно сделать выводы:</p>
+        <ul>
+            <li>
+                Значение коэффициента текущей ликвидности на {{ balance.date.year }} год ({{ current_ratio }}) {{ analyse_result }}
+                {% if current_ratio > 2 %}
+                    - Компания обладает избыточными ликвидными средствами. Рассмотрите возможность инвестирования излишков в прибыльные проекты или улучшение операционной деятельности.
+                {% elif 1 <= current_ratio <= 2 %}
+                    - Компания имеет достаточно ликвидности для покрытия своих краткосрочных обязательств. Поддерживайте этот уровень, уделяя внимание оптимизации оборотного капитала.
+                {% else %}
+                    - Компания может столкнуться с трудностями при выполнении краткосрочных обязательств. Необходимо улучшить управление оборотным капиталом, возможно, путем сокращения запасов или ускорения сбора дебиторской задолженности.
+                {% endif %}
+            </li>
+            <li>Значение коэффициента абсолютной ликвидности составило {{ absolute_ratio }} при норме 0,2. За последний год показатель {{ analyse_result_analyse_absolute_ratio }}
+                {% if absolute_ratio > 0.2 %}
+                    - Высокое значение указывает на хорошую финансовую готовность.
+                {% else %}
+                    - Необходимо улучшить управление денежными средствами и увеличить долю наиболее ликвидных активов.
+                {% endif %}
+            </li>
+            <li>
+                Коэффициент быстрой ликвидности на {{ balance.date.year }} {{ analyse_result_analyse_quick_ratio }}
+                {% if quick_ratio > 1 %}
+                    - Компания в хорошем состоянии для покрытия краткосрочных обязательств без учета запасов. Это показатель здоровой ликвидности. Продолжайте контролировать дебиторскую задолженность и денежные средства.
+                {% elif quick_ratio == 1 %}
+                    - Компания может покрыть свои краткосрочные обязательства, однако с небольшой маржой. Будьте внимательны к уровню дебиторской задолженности и возможностям её быстрого превращения в денежные средства.
+                {% else %}
+                    - Возможны проблемы с ликвидностью при отсутствии быстрой реализации запасов. Необходимо срочно улучшить сбор дебиторской задолженности и пересмотреть политику управления запасами.
+                {% endif %}
+            </li>
+        </ul>
+    </div>
+
+    <h3>График коэффициентов ликвидности</h3>
+    <img src="data:image/png;base64,{{ chart }}" alt="Chart">
+
+    <div>
+        <h3>Прогноз изменения баланса и ликвидности</h3>
+        <p>
+            При следовании рекомендациям, можно ожидать следующие изменения:
+            <ul>
+                <li>
+                    Увеличение текущей ликвидности до безопасного уровня (1-2) за счет улучшения управления оборотным капиталом и инвестирования излишков.
+                </li>
+                <li>
+                    Улучшение быстрой ликвидности через более эффективное управление дебиторской задолженностью и оптимизацию запасов.
+                </li>
+                <li>
+                    Повышение абсолютной ликвидности за счет увеличения доли денежных средств и наиболее ликвидных активов.
+                </li>
+            </ul>
+        </p>
+    </div>
+<table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>Показатель</th>
+            <th>Прогноз</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <th>{{next_year_liquidity}}</th>
+
+        </tr>
+
+        </tbody>
+    </table>
+</div>
+    <button type="submit" class="btn btn-primary">Сохранить</button>
+    <button type="submit" class="btn btn-primary">Скачать</button>
+<script>
+var ctx = document.getElementById('capitalPieChart').getContext('2d');
+var capitalPieChart = new Chart(ctx, {
+    type: 'pie',
+    data: {
+        labels: {{ capital_structure_labels|safe }},
+        datasets: [{
+            data: {{ percentages|safe }},
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        responsive: true,
+        tooltips: {
+            callbacks: {
+                label: function(tooltipItem, data) {
+                    var dataset = data.datasets[tooltipItem.datasetIndex];
+                    var total = dataset.data.reduce(function(previousValue, currentValue, currentIndex, array) {
+                        return previousValue + currentValue;
+                    });
+                    var currentValue = dataset.data[tooltipItem.index];
+                    var percentage = Math.round(((currentValue / total) * 100));
+                    return percentage + "%";
+                }
+            }
+        }
+    }
+});
+</script>
+{% endblock %}

@@ -1,0 +1,89 @@
+@startuml
+
+class User {
+    - id: int
+    - first_name: str
+    - last_name: str
+    - username: str
+    - email: str
+    - password: str
+    ...
+}
+
+class Indicator {
+    - name: str
+    - code: str (PK)
+    ...
+}
+
+class Balance {
+    - user_id: int (FK)
+    - date: Date
+    - company_name: str
+    - activity_type_id: int (FK)
+    ...
+}
+
+class IndicatorValue {
+    - balance_id: int (FK)
+    - indicator_id: str (FK)
+    - value: float
+    - value2: float
+    - value3: float
+    ...
+}
+
+class ActivityType {
+    - name: str
+    ...
+}
+
+class Report {
+    - user_id: int (FK)
+    - balance_id: int (FK)
+    - created_at: DateTime
+    - report_data: str
+    - chart: str
+    ...
+}
+
+class BalanceEditor {
+    - request: HttpRequest
+    - balance: Balance
+    - indicator_forms: list[IndicatorValueForm]
+    ...
+}
+
+class BalanceCreator {
+    - request: HttpRequest
+    ...
+}
+
+class ProfileViewer {
+    - request: HttpRequest
+    ...
+}
+
+class Register {
+    - template_name: str
+    ...
+}
+
+class RegisterForm {
+    ...
+}
+
+User "1" -- "*" Balance : owns
+User "1" -- "*" Report : creates
+Balance "1" -- "*" IndicatorValue : contains
+Balance "1" -- "1" User : belongs_to
+Balance "1" -- "1" ActivityType : has_activity_type
+Report "1" -- "*" IndicatorValue : has
+Report "1" -- "1" Balance : based_on
+BalanceEditor -- Balance : edits
+BalanceCreator -- Balance : creates
+ProfileViewer -- Balance : views_profile
+Register -- RegisterForm : uses
+RegisterForm -- User : extends
+
+@enduml

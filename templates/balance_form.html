@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<h1>Форма финансового баланса</h1>
+<div class="file-block">
+    <label for="formFile" class="form-label mt-4">Чтобы заполнить форму данными из файла выберите файл EXEL</label>
+    <div class="d-flex align-items-center">
+        <input class="form-control me-2" id="formFile" name="file" type="file">
+        <input type="button" class="btn btn-outline-success" onclick="readFile()" value="Записать файл">
+    </div>
+</div>
+<form method="post">
+    {% csrf_token %}
+    <div class="form-group">
+        {{ balance_form.company_name.label_tag }}
+        {{ balance_form.company_name }}
+    </div>
+    <div class="form-group">
+        {{ balance_form.activity_type.label_tag }}
+        {{ balance_form.activity_type }}
+    </div>
+    <div class="form-group">
+        {{ balance_form.date.label_tag }}
+        {{ balance_form.date }}
+    </div>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Наименование кода</th>
+                <th>Код</th>
+                <th id="selected_year">Выбранный год</th>
+                <th id="previous_year">Предыдущий год</th>
+                <th id="two_years_ago">Два года назад</th>
+            </tr>
+        </thead>
+<tbody>
+
+            {% for indicator, form in indicator_form_data %}
+                <tr>
+                    <td>{{ indicator.name }}</td>
+                    <td>{{ indicator.code }}</td>
+                    <td>{{ form.value }}</td>
+                    <td>{{ form.value2 }}</td>
+                    <td>{{ form.value3 }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <button type="submit" class="btn btn-primary">Создать отчет</button>
+</form>
+
+<!-- Холст для диаграммы -->
+<canvas id="assetsChart" width="400" height="200"></canvas>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="{% static 'users/js/balance.js' %}"></script>
+{% endblock %}

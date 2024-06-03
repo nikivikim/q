@@ -1,0 +1,9 @@
+   .file-block {
+        padding: 10px; /* Внутренний отступ */
+        max-width: 500px; /* Максимальная ширина блока */
+          }
+.table-bordered {
+margin-top:20px
+}
+.bold{
+font-weight:bold}

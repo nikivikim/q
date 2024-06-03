@@ -1,0 +1,143 @@
+.container_login {
+margin-top:200px;
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #fff;
+        position: absolute;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%)
+}
+.container_register {
+margin-top:200px;
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #fff;
+        position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%)
+}
+
+.container_register h1 {
+
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.container_register form {
+
+    margin-bottom: 20px;
+}
+
+.container_register label {
+    margin-bottom: 5px;
+}
+
+.container_register .btn-success {
+    width: 100%;
+}
+
+.container_register input[type="text"],
+.container_register input[type="password"] {
+    width: 100%;
+    height: 45px;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    border-bottom: 1px solid #ccc; /* добавляем подчеркивание вместо границы */
+    outline: none; /* убираем обводку при фокусе */
+}
+
+.container_register input[type="text"]:focus,
+.container_register input[type="password"]:focus {
+    border-color: #007bff; /* меняем цвет подчеркивания при фокусе */
+}
+
+.container_register input[type="email"] {
+    width: 100%;
+    height: 45px;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    outline: none;
+}
+
+
+.container_register input[type="email"]:focus {
+    border-color: #007bff;
+}
+
+.container_login input[type="email"] {
+    width: 100%;
+    height: 45px;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    outline: none;
+}
+
+
+.container_login input[type="email"]:focus {
+    border-color: #007bff;
+}
+
+.container_register a {
+    color: inherit; /* наследуем цвет текста */
+    text-decoration: none; /* убираем подчеркивание */
+}
+
+.container_register a:hover {
+    text-decoration: none; /* убираем подчеркивание при наведении */
+}
+.container_login h1 {
+
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.container_login form {
+
+    margin-bottom: 20px;
+}
+
+.container_login label {
+    margin-bottom: 5px;
+}
+
+.container_login .btn-success {
+    width: 100%;
+}
+
+.container_login input[type="text"],
+.container_login input[type="password"] {
+    width: 100%;
+    height: 45px;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    border-bottom: 1px solid #ccc; /* добавляем подчеркивание вместо границы */
+    outline: none; /* убираем обводку при фокусе */
+}
+
+.container_login input[type="text"]:focus,
+.container_login input[type="password"]:focus {
+    border-color: #007bff; /* меняем цвет подчеркивания при фокусе */
+}
+
+.container_login a {
+    color: inherit; /* наследуем цвет текста */
+    text-decoration: none; /* убираем подчеркивание */
+}
+
+.container_login a:hover {
+    text-decoration: none; /* убираем подчеркивание при наведении */
+}
